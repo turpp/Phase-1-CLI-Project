@@ -1,43 +1,47 @@
-#genre has man movies
-#genre has a name
-#will be able to get a list of movies by name of genre
-
-
-#????will need to pull genre from movie data.... genre is coded in ids. will need to convert ids to named geners
-
-
-
+#----------file outline---------
+# genre has many movies%%%%%%%%%%%%%%%%%%%%%%%%
+# will give me a list of movies in each genre%%%%%%%%%%%%%%%%%%
+# will have a master list of genres%%%%%%%%%%%%%%%%%%%%
+# will get data from MovieData and create instances%%%%%%%%%%%%%5
+#----------------------------------
 class Genre
 attr_accessor :name
-attr_reader :title, :movies
+attr_reader :movies
 @@all=[]
     def initialize(name)
-        @movies = []
+        @movies=[]
         @name=name
         @@all << self
     end
 
-    def movies
-        @movies
+    def get_movies #notifies Genre what movies belong to it.
+        all_movies=Movies.all
+        all_movies.find_all do |movie|
+            if movie.genre.include?(self.name) == true
+                @movies << movie
+            end 
+        end
     end
 
-    def add_movie_to_genre(movie)
-        @movies << movie
-    end
-
-    def self.all
+    def self.all #shoes all genres from the api collection
         @@all
     end
 
+    def self.clean_genre #prints out all genres in a user friendly way
+        n=0
+        array=Genre.all.collect do |genre|
+            genre.name
+            end
+        while n < 12
+            puts "____________________________________________________________"
+            puts"#{n+1}. #{array[n]}"
+            puts "------------------------------------------------------------"
+            n += 1
+        end
 
+    end
 end
 
 
 
-# ------------------
-# comedy = Genre.new(comedy)=> new instance comedy. that has a blank array of movies
-# comedy.movies => array of movies assocated with comedy
-# Genre.all => array off all the genres
-# comedy.add_movie_to_genre(Inception) => comedy movie array now holds Inception movie. 
-# comedy.movies => [Inception]
 
