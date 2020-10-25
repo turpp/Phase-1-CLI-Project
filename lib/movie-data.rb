@@ -7,6 +7,7 @@
 
 
 class MovieData
+    
     def get_movies_pages #gets data from API
         array=[]
         n=1
@@ -23,38 +24,38 @@ class MovieData
     array.flatten
 end
 
-    def movie_titles #gets just the titles from the api data
-        clean_data = self.get_movies_pages
-        clean_data.collect do |movies|
-        movies["original_title"]
-        end
-    end
+    # def movie_titles #gets just the titles from the api data
+    #     clean_data = self.get_movies_pages
+    #     clean_data.collect do |movies|
+    #     movies["original_title"]
+    #     end
+    # end
 
-    def movie_genres #gets just the genres ids from api data
-        clean_data = self.get_movies_pages
-        big_array=clean_data.collect do |movies|
-        movies["genre_ids"].uniq
-        # movies["genre_ids"].collect do |id_array|
-        #     id_array.uniq
-        end
-        big_array.flatten.uniq   
-    end
+    # def movie_genres #gets just the genres ids from api data
+    #     clean_data = self.get_movies_pages
+    #     big_array=clean_data.collect do |movies|
+    #     movies["genre_ids"].uniq
+    #     # movies["genre_ids"].collect do |id_array|
+    #     #     id_array.uniq
+    #     end
+    #     big_array.flatten.uniq   
+    # end
     
-    def rating_asc #sorts api data by rating in ascending order
-        clean_data = self.get_movies_pages
-        rated=clean_data.sort_by { |hsh| hsh["vote_average"] }
-        rated
-    end
+    # def rating_asc #sorts api data by rating in ascending order
+    #     clean_data = self.get_movies_pages
+    #     rated=clean_data.sort_by { |hsh| hsh["vote_average"] }
+    #     rated
+    # end
 
-    def rating_desc #sorts api data by rating in descenting order.
-        clean_data = self.get_movies_pages
-        rated=clean_data.sort_by { |hsh| hsh["vote_average"] }.reverse
-        rated
-    end
+    # def rating_desc #sorts api data by rating in descenting order.
+    #     clean_data = self.get_movies_pages
+    #     rated=clean_data.sort_by { |hsh| hsh["vote_average"] }.reverse
+    #     rated
+    # end
 
     def movie_title_genre #organizes api data in a way to create new Movie instances. 
-        clean_data = self.get_movies_pages
-        clean_data.map do |hash|
+        # clean_data = self.get_movies_pages
+        $clean_data.map do |hash|
 
             { "original_title": hash["original_title"], "genre_ids": hash["genre_ids"][0], "vote_average": hash["vote_average"]}
           end

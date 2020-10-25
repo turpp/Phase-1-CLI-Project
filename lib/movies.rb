@@ -77,8 +77,10 @@ attr_accessor :title, :genre, :rating
     end
 
     def detail #data from api has lots of infomration. This returns and organizes all the info for a detialed view.
-        clean_data=MovieData.new.get_movies_pages
-        movie_detail=clean_data.find do |hsh|
+       #---------------
+        # clean_data=MovieData.new.get_movies_pages
+       #-------------- 
+        movie_detail=$clean_data.find do |hsh|
             hsh["original_title"]==self.title
             end
         overview=movie_detail["overview"]
@@ -98,9 +100,6 @@ attr_accessor :title, :genre, :rating
         puts "Overview:e"
         puts "#{overview}"
     end
-
-#--------------
-#Inception.genre => genre object
 
     def self.create_genre_by_movie #this creates all of the genre instances. 
        array_genre=[]

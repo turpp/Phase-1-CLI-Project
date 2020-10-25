@@ -16,8 +16,10 @@ class WatchList
 
     def self.view_list #view what movies are in watch list
         if @@movies.count == 0
-            puts "list is empty"
+            puts " "
+            puts "List is Empty"
         else
+        puts ""
         puts "Current List"
         @@movies.each do |movie|
             puts "- #{movie}"

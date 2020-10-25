@@ -32,15 +32,13 @@ class User
         puts "3. Movies by Rating"
         puts "4. View Watch List"
         puts "`````````````````````````````````````````````````````````````"
-        input=gets.chomp.downcase
+        
+        input = self.user_input
         if input == "1"
             self.all_movie_menu
             self.movies_selected
         elsif input == "2"
             self.genre_movies
-        elsif input == "exit"
-            puts "Come Back Soon!"
-            exit!
         elsif input == "3"
             self.sorted_all_movie_menu
             self.sorted_movies_selected
@@ -48,6 +46,7 @@ class User
                 WatchList.view_list
                 self.wrap_up_watch_list
         else
+            clear
             puts "Invalid input. Try again!"
             main_menu
         end
@@ -73,13 +72,8 @@ class User
     #------------selections-------------------
     def movies_selected #takes user input and selects movie to view more detail on that selected movie
         puts "Select movie"
-        inputs = gets.chomp.downcase
-        if inputs=="exit"
-            puts "Come Back Soon!"
-            exit!
-        elsif inputs=="00"
-            self.main_menu
-        else
+    
+        inputs=self.user_input
         user_number = inputs.to_i
             if user_number > 100
                 puts "Invalid input. Try again"
@@ -91,31 +85,21 @@ class User
                 puts "Invalid input. Try agin"
                 self.movies_selected
             else
+            clear
             user_number -= 1
             @selected_movie = Movies.all[user_number]
             @selected_movie.detail
-            puts ""
-            puts "____________________________"
-            puts "1. Back to Movie Selection"
-            puts "2. Back to Main Menu"
-            puts "3. Add to Watch List"
-            puts "Exit Program"
+            self.user_menu_movie_selection
             self.wrap_up_movie
             end
-        end
     end
 
     def genre_movies #allows the suer to select what genre they want to explore from the genre menu
         self.all_genre_menu
         n=0
         puts "Enter the number for the Genre you would like to view"
-        genre_input = gets.chomp.downcase
-        if genre_input == "exit"
-            puts "Come Back Soon!"
-            exit!
-        elsif genre_input =="00"
-            self.main_menu
-        else
+       
+        genre_input = self.user_input
             user_number = genre_input.to_i
 
             if user_number > 12
@@ -135,7 +119,7 @@ class User
             movie.title
                 end
             end
-        end
+        
         until n == @@titles.count
         puts "____________________________________________________________"
         puts "#{n+1}. #{@@titles[n]}"
@@ -146,14 +130,16 @@ class User
     end
 
     def genre_selction #allows the user to select a movie in said genre and get detail on just that movies
-        puts "Select the movie for more information or enter 00 for the Genre Menu"
-        input=gets.chomp.downcase
-        if input =="exit"
-            puts "Come Back Soon!"
-            exit!
-        elsif input == "00"
+        puts "Select the movie for more information"
+        puts "Enter 00 for Main Menu"
+        puts "Enter 000 for Genre Menu"
+        
+        input= self.user_input
+        if input == "000"
+            clear
             self.genre_movies
         else
+        
         user_number = input.to_i
             if user_number == 0
              puts "Invalid input. Try again"
@@ -165,15 +151,11 @@ class User
                 puts "Invlaid input. Try again"
                 self.genre_selction
             else
+                clear
                 user_number -= 1
                 @selected_movie = @@movies_in_genre[user_number]
                 @selected_movie.detail
-                puts " "
-                puts "_________________________________"
-                puts "1. Back to Genre Menu"
-                puts "2. Back to Main Menu"
-                puts "3. Add to Watch List"
-                puts "Exit Program"
+                self.user_menu_genre_selection
                 self.wrap_up_genre
             end
         end
@@ -181,51 +163,40 @@ class User
 
      def sorted_movies_selected #selection of movie in the Ranked by rating  menu
         puts "Select Movie"
-        inputs = gets.chomp.downcase
-        if inputs=="exit"
-            puts "Come Back Soon!"
-            exit!
-        elsif inputs=="00"
-            self.main_menu
-        else
+        inputs = self.user_input
         user_number = inputs.to_i
             if user_number > 100
                 puts "Invalid input. Try again"
-                self.movies_selected
+                self.sorted_movies_selected
             elsif user_number < 0
                     puts "Invalid input. Try again"
-                    self.movies_selected
+                    self.sorted_movies_selected
             elsif user_number == 0
                 puts "Invalid input. Try agin"
-                self.movies_selected
+                self.sorted_movies_selected
             else
+            clear
             user_number -= 1
             @the_selected_movie = Movies.sort_by_rating[user_number]
             @the_selected_movie.detail
-            puts ""
-            puts "____________________________"
-            puts "1. Back to Movie Selection"
-            puts "2. Back to Main Menu"
-            puts "3. Add to Watch List"
-            puts "Exit Program"
+            self.user_menu_movie_selection
             self.wrap_up_sorted_movie
             end
-        end
     end
     #------------ending wrap ups---------------
      def wrap_up_movie #the ending input on the movie by popularity
-        last_input=gets.chomp.downcase
+        
+        last_input= self.user_input
         case 
         when last_input == "1"
             self.all_movie_menu
             self.movies_selected
         when last_input=="2"
+            clear
             self.main_menu
-        when last_input=="exit"
-            puts "Come Back Soon!"
-            exit!
         when last_input=="3"
             WatchList.add_to_list(@selected_movie.title)
+            clear
             self.main_menu
         else
             puts "Invalid input. Try again"
@@ -234,17 +205,16 @@ class User
      end
 
      def wrap_up_genre #the ending input on the movie by genre
-        last_input=gets.chomp.downcase
+        last_input=self.user_input
         case 
         when last_input == "1"
             self.genre_movies
         when last_input=="2"
+            clear
             self.main_menu
-        when last_input=="exit"
-            puts"Come Back Soon!"
-            exit!
         when last_input == "3"
             WatchList.add_to_list(@selected_movie.title)
+            clear
             self.main_menu
         else
             puts "Invalid input. Try again"
@@ -253,20 +223,18 @@ class User
      end
 
     def wrap_up_sorted_movie #the ending input on the movie by rating
-        last_input=gets.chomp.downcase
+        last_input=self.user_input
         case 
         when last_input == "1"
             self.sorted_all_movie_menu
-            self.movies_selected
+            self.sorted_movies_selected
         when last_input=="2"
+            clear
             self.main_menu
         when last_input =="3"
             WatchList.add_to_list(@the_selected_movie.title)
+            clear
             self.main_menu
-
-        when last_input=="exit"
-            puts "Come Back Soon!"
-            exit!
         else
             puts "Invalid input. Try again"
             self.wrap_up_sorted_movie
@@ -274,57 +242,72 @@ class User
      end
 
     def wrap_up_watch_list #the ending input on the watch list
-        # puts "Select Movie for more info"
         puts''
         puts'_________________________________'
         puts "00. Main Menu"
-        # puts "Select Movie for More Detail"
         puts "Type CLEAR to Empty List"
-        last_input=gets.chomp.downcase
-        
-        if last_input == "00"
-            self.main_menu
-
-        elsif last_input=="exit"
-                puts "Come Back Soon!"
-                exit!
-        elsif last_input=="clear"
+        last_input=self.user_input
+        if last_input=="clear"
             WatchList.clear_list
-            # self.clear
+            clear
             self.main_menu
         else 
             puts "Invalid input. Try again"
             self.wrap_up_watch_list
         end
+    end
     
-        def watch_list_menu
+    def watch_list_menu
             WatchList.view_list
             self.wrap_up_watch_list   
+    end
+
+    def user_input
+        user_input=gets.chomp.downcase
+        if user_input == "00"
+            clear
+            self.main_menu
+        elsif user_input == "exit"
+            puts "Come Back Soon!"
+            exit!
+        else
+            user_input
         end
     end
 
+    def user_menu_movie_selection
+        puts ""
+        puts "____________________________"
+        puts "1. Back to Movie Selection"
+        puts "2. Back to Main Menu"
+        puts "3. Add to Watch List"
+        puts "Exit Program"
+    end
 
+    def user_menu_genre_selection
+        puts " "
+        puts "_________________________________"
+        puts "1. Back to Genre Menu"
+        puts "2. Back to Main Menu"
+        puts "3. Add to Watch List"
+        puts "Exit Program"
+    end
+        
+    def clear
+        system 'clear'
+    end
 
+end
 
-#------------------possible refactoring----------
-#input method. it takes in input and downcase and checks for exit, 00 main menu.
-# method that puts out the ending wrap ups
-
-
-
-
-#-----------found bugs-----------------
-#if i go in the rating section and select movie detail and then go back to movie selection and then go to movie detail and then go back to movie selection... it goes to sorted by popularity not rating
 
 
 #additions----------
-#put in my clear method to clean up program when you go back to the main menu
 #can get more detial from watch list
 #can delete certain things on watch list
+# when add to watch list remains on the page???
 
 
-def clear
-    system 'clear'
-end
 
-end
+
+#possible improvement: I can add a global variable clean_data that is the hashes from the api. and that way it doesnt make multiple calls to the api and get different data.
+#when I up the pages pulled from api I need to change my parameters on input and also all the genres. 
