@@ -11,7 +11,7 @@ class MovieData
     def get_movies_pages #gets data from API
         array=[]
         n=1
-    while n < 6
+    while n < 11
         url= "https://api.themoviedb.org/3/discover/movie?api_key=356630208dd743ca0f8ab6dcc24b36c6&language=en-US&region=us&sort_by=vote_count.desc&include_adult=true&include_video=false&page=#{n}&with_genres=28%7C35%7C53%7C10749%7C18%7C12%7C27%7C878"
         uri = URI.parse(url)
         response = Net::HTTP.get_response(uri)

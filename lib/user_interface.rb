@@ -75,7 +75,7 @@ class User
     
         inputs=self.user_input
         user_number = inputs.to_i
-            if user_number > 100
+            if user_number > 200
                 puts "Invalid input. Try again"
                 self.movies_selected
             elsif user_number < 0
@@ -165,7 +165,7 @@ class User
         puts "Select Movie"
         inputs = self.user_input
         user_number = inputs.to_i
-            if user_number > 100
+            if user_number > 200
                 puts "Invalid input. Try again"
                 self.sorted_movies_selected
             elsif user_number < 0
@@ -311,3 +311,10 @@ end
 
 #possible improvement: I can add a global variable clean_data that is the hashes from the api. and that way it doesnt make multiple calls to the api and get different data.
 #when I up the pages pulled from api I need to change my parameters on input and also all the genres. 
+
+
+
+
+#things to tighten up
+#-look into removing some of the self
+#-double check my attr_accessors

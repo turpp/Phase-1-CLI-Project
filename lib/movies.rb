@@ -7,7 +7,8 @@
 #-------------------------------------
 
 class Movies
-attr_accessor :title, :genre, :rating
+    attr_accessor :genre
+    attr_reader :title, :rating
 @@all = []
     def initialize(title,genre,rating)
         @title = title
@@ -97,7 +98,7 @@ attr_accessor :title, :genre, :rating
         puts ''
         puts "Total Votes: #{total_votes}"
         puts ''
-        puts "Overview:e"
+        puts "Overview:"
         puts "#{overview}"
     end
 
@@ -117,7 +118,7 @@ attr_accessor :title, :genre, :rating
         array=Movies.all.collect do |movie|
             movie.title
         end
-        while n < 100
+        while n < 200
             puts "____________________________________________________________"
             # puts"#{n+1}. #{array[n]}                 #{n+2}. #{array[n+1]}"
             puts"#{n+1}. #{array[n]}"
@@ -132,7 +133,7 @@ attr_accessor :title, :genre, :rating
         array=Movies.sort_by_rating.collect do |movie|
             movie.title
         end
-        while n < 100
+        while n < 200
             puts "____________________________________________________________"
             # puts"#{n+1}. #{array[n]}                 #{n+2}. #{array[n+1]}"
             puts"#{n+1}. #{array[n]}"
