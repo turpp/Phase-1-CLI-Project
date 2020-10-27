@@ -1,9 +1,11 @@
 #-------file outline----------------
-#movies belongs to genre
-#Movies has a title, genre, rating
-#This will give me a list of all the movies
-#it will give me a way to get more detial about each movie
-#it will take data from MovieData and create instances with it.
+# movies belongs to genre
+# Movies have a title, genre, rating
+# This will give me a list of all the movies
+# it will give me a way to get more detial about each movie
+# it will take data from MovieData and create instances with it.
+# it will sort the movies by popularity
+# it will sort the movies by rating
 #-------------------------------------
 
 class Movies

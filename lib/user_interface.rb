@@ -1,9 +1,11 @@
 #-------------file overview----------------
-#this is my program file. 
+# this is my program file. 
 # this handels all user interface.
-# this file is designed to run listing to user inputs and only stop when user say to stop
-#this will pull methods from other files to get the infomation the user wants.
+# this file is designed to run and gather user inputs and only stop when user say to stop
+# this will pull methods from other files to get the infomation the user wants.
 # methods on this page are grouped by Menu, selection process, ending inputs
+#--------------------------------------------
+
 require_relative('../config/environment.rb')
 
 class User
@@ -12,7 +14,7 @@ class User
         puts ""
         puts ''
         puts "---------------------------------"
-        puts "Welcome to Movie Selector 9000!"
+        puts "Welcome to Movie Madness!"
         puts "---------------------------------"
         puts  "Instructions: To progress through the application, please type the number for your selection and press enter. If at anytime you wish to close the program, type exit and press enter."
         puts " "

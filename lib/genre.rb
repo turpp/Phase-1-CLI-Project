@@ -15,6 +15,9 @@ attr_reader :movies
     end
 
     def get_movies #notifies Genre what movies belong to it.
+        #goes through all movie intances
+        #looks to see if a movie instance has a certain genre
+        #if movie has genre then will push movie to the genre instance - movies variable
         all_movies=Movies.all
         all_movies.find_all do |movie|
             if movie.genre.include?(self.name) == true
